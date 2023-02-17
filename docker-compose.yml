@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  producer:
+    build: ./producer
+    container_name: producer
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./producer:/app
+    depends_on:
+      - rabbitmq
